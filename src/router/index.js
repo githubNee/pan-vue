@@ -7,14 +7,7 @@ export default new Router({
     routes: [
         {
             path: '/',
-            component: resolve => require(['../common/Header.vue'], resolve),
-            children:[
-                {
-                    path: '/public',
-                    component: resolve => require(['../components/Public.vue'], resolve)
-                }
-            ]
+            component: resolve => require(['../components/Public.vue'], resolve),
         }
-
     ]
 })
