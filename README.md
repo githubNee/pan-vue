@@ -1,4 +1,4 @@
-# vue-pan
+# pan-vue
 
 > A Vue.js project
 
