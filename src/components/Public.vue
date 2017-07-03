@@ -13,16 +13,17 @@
       </template>
     </div> -->
 
-    <div id="heading" style="text-align:center">
+    <div id="heading" style="margin:7% auto;text-align:center">
       <div style="font-size:45px;color:#444444;font-weight:bold;">老司机 带带我</div>
-      <div style="font-size:18px;color:#dddddd">啊嘞啊嘞嘞</div>
+      <div style="font-size:18px;color:#bbbbbb;letter-spacing:2px;">啊嘞啊嘞嘞</div>
     </div>
 
-    <div id="container">
+    <div id="container" style="margin:0 auto">
       <el-table
         :data="tableData"
-        fit=true
-        row-style="height:45px"
+        :row-style="{
+          'height':'45px'
+        }"
         style="border-style: hidden hidden;width: 70%;text-align:left;margin:20px auto;"
         >
         <el-table-column
