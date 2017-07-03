@@ -1,25 +1,33 @@
 <template>
   <div class="">
-    <div id="wrapper">
+    <!-- <div id="wrapper">
       <template  v-if="getToken()">
         <el-menu class="el-menu-demo" mode="horizontal" >
           <el-menu-item index="1" @click="loginout()">登出</el-menu-item>
         </el-menu>
       </template>
       <template v-else>
-        <el-menu class="el-menu-demo" mode="horizontal">
+        <el-menu theme="dark" class="el-menu-demo" mode="horizontal">
           <el-menu-item index="1"><el-button type="text" @click="open1">登录</el-button></el-menu-item>
         </el-menu>
       </template>
+    </div> -->
+
+    <div id="heading" style="text-align:center">
+      <div style="font-size:45px;color:#444444;font-weight:bold;">老司机 带带我</div>
+      <div style="font-size:18px;color:#dddddd">啊嘞啊嘞嘞</div>
     </div>
+
     <div id="container">
       <el-table
         :data="tableData"
+        fit=true
+        row-style="height:45px"
         style="border-style: hidden hidden;width: 70%;text-align:left;margin:20px auto;"
         >
         <el-table-column
           label="文件名"
-          width="400">
+          width="300">
           <template scope="scope">
             <a target="_blank" :href=scope.row.link style="color:#222222;text-decoration:none;">{{scope.row.key}}</a>
           </template>
