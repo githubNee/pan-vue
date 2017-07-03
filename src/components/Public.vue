@@ -21,7 +21,7 @@
           label="文件名"
           width="400">
           <template scope="scope">
-            <a target="_blank" :href=scope.row.link style="color:#222222">{{scope.row.key}}</a>
+            <a target="_blank" :href=scope.row.link style="color:#222222;text-decoration:none;">{{scope.row.key}}</a>
           </template>
         </el-table-column>
         <el-table-column
@@ -44,11 +44,8 @@
 
         <el-table-column label="下载文件" align="center">
           <template scope="scope">
-            <el-button
-              size="large"
-              type="text"
-              icon="caret-bottom"            
-              @click="Download(scope.$index, scope.row, scope.row.link)"></el-button>
+            <input type="image" width="18px" align="center" src="static/image/down.png"
+                  @click="Download(scope.$index, scope.row, scope.row.link)">
           </template>
         </el-table-column>
       </el-table>
