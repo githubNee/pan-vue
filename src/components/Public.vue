@@ -15,43 +15,38 @@
     <div id="container">
       <el-table
         :data="tableData"
-        border
-        style="width: 60%;text-align:left;margin:20px auto;"
+        style="border-style: hidden hidden;width: 70%;text-align:left;margin:20px auto;"
         >
-        <!-- <el-table-column
-           type="selection"
-           width="55">
-         </el-table-column> -->
-       <el-table-column
-         prop="key"
-         label="文件名"
-         sortable
-         width="400">
-       </el-table-column>
+        <el-table-column
+          prop="key"
+          label="文件名"
+          width="400">
+        </el-table-column>
         <el-table-column
          prop="putTime"
-         label="日期"
+         label="上传日期"
          sortable
          width="220"
          >
-         <template scope="scope">
-           <el-icon name="time"></el-icon>
-           <span style="margin-left: 10px" >{{ scope.row.putTime }}</span>
-         </template>
-       </el-table-column>
+          <template scope="scope">
+            <span>{{ scope.row.putTime }}</span>
+          </template>
+        </el-table-column>
 
-       <el-table-column
-         prop="fsize"
-         label="文件大小"
-         sortable
-         width="220">
-       </el-table-column>
+        <el-table-column
+          prop="fsize"
+          label="文件大小"
+          sortable
+          width="220">
+        </el-table-column>
 
-        <el-table-column label="操作">
+        <el-table-column label="下载文件" align="center">
           <template scope="scope">
             <el-button
-              size="small"
-              @click="Download(scope.$index, scope.row, scope.row.link)">下载</el-button>
+              size="large"
+              type="text"
+              icon="caret-bottom"            
+              @click="Download(scope.$index, scope.row, scope.row.link)"></el-button>
           </template>
         </el-table-column>
       </el-table>
