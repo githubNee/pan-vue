@@ -18,9 +18,11 @@
         style="border-style: hidden hidden;width: 70%;text-align:left;margin:20px auto;"
         >
         <el-table-column
-          prop="key"
           label="文件名"
           width="400">
+          <template scope="scope">
+            <a target="_blank" :href=scope.row.link style="color:#222222">{{scope.row.key}}</a>
+          </template>
         </el-table-column>
         <el-table-column
          prop="putTime"
@@ -55,10 +57,10 @@
 </template>
 
 <script>
-import axios from 'axios';
-import server from '../../config/index';
-import router from '../router/index.js';
-export default {
+  import axios from 'axios';
+  import server from '../../config/index';
+  import router from '../router/index.js';
+  export default {
     data() {
       return {
         url: server.url + '/pan/public',
@@ -130,7 +132,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#wrapper {
+  #wrapper {
       position: relative;
       box-sizing: border-box;
       width: 100%;
