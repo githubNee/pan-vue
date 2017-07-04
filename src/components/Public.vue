@@ -29,7 +29,7 @@
         >
         <el-table-column
           label="文件名"
-          min-width="500">
+          min-width="450">
           <template scope="scope">
             <a target="_blank" :href=scope.row.link style="color:#000000;text-decoration:none;">{{scope.row.key}}</a>
           </template>
@@ -38,7 +38,7 @@
          prop="putTime"
          label="上传日期"
          sortable
-         width="270"
+         width="220"
          >
           <template scope="scope">
             <span>{{ scope.row.putTime }}</span>
@@ -49,7 +49,7 @@
           prop="fsize"
           label="文件大小"
           sortable
-          width="270">
+          width="220">
         </el-table-column>
 
         <el-table-column label="下载文件" align="center" width="150">
