@@ -13,31 +13,32 @@
       </template>
     </div> -->
 
-    <div id="heading" style="margin:7% auto;text-align:center">
+    <div id="heading" style="margin:10% 0 7% 0;text-align:center">
       <div style="font-size:45px;color:#444444;font-weight:bold;">老司机 带带我</div>
       <div style="font-size:18px;color:#bbbbbb;letter-spacing:2px;">啊嘞啊嘞嘞</div>
     </div>
 
-    <div id="container" style="margin:0 auto">
+    <div id="container" style="margin:0 0">
       <el-table
         :data="tableData"
         :row-style="{
-          'height':'45px'
+          'background':'rgba(0,0,0,0)',
+          'height':'45px',
         }"
-        style="border-style: hidden hidden;width: 70%;text-align:left;margin:20px auto;"
+        style="background:rgba(240,240,240,0.5);border-style: hidden hidden;width: 70%;text-align:left;margin:0 auto;"
         >
         <el-table-column
           label="文件名"
-          width="300">
+          min-width="500">
           <template scope="scope">
-            <a target="_blank" :href=scope.row.link style="color:#222222;text-decoration:none;">{{scope.row.key}}</a>
+            <a target="_blank" :href=scope.row.link style="color:#000000;text-decoration:none;">{{scope.row.key}}</a>
           </template>
         </el-table-column>
         <el-table-column
          prop="putTime"
          label="上传日期"
          sortable
-         width="220"
+         width="270"
          >
           <template scope="scope">
             <span>{{ scope.row.putTime }}</span>
@@ -48,10 +49,10 @@
           prop="fsize"
           label="文件大小"
           sortable
-          width="220">
+          width="270">
         </el-table-column>
 
-        <el-table-column label="下载文件" align="center">
+        <el-table-column label="下载文件" align="center" width="150">
           <template scope="scope">
             <input type="image" width="18px" align="center" src="static/image/down.png"
                   @click="Download(scope.$index, scope.row, scope.row.link)">
