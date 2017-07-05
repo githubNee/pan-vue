@@ -13,10 +13,7 @@
       </template>
     </div> -->
 
-    <div id="heading" style="margin:10% 0 7% 0;text-align:center">
-      <div style="font-size:45px;color:#444444;font-weight:bold;">老司机 带带我</div>
-      <div style="font-size:18px;color:#bbbbbb;letter-spacing:2px;">啊嘞啊嘞嘞</div>
-    </div>
+    <my-title></my-title>
 
     <div id="container" style="margin:0 0">
       <el-table
@@ -67,12 +64,17 @@
   import axios from 'axios';
   import server from '../../config/index';
   import router from '../router/index.js';
+  import myTitle from './common/Title.vue';
+
   export default {
     data() {
       return {
         url: server.url + '/pan/public',
         tableData: []
       }
+    },
+    components: {
+      myTitle
     },
     created () {
       var that = this;
