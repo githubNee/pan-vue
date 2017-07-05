@@ -1,27 +1,28 @@
 <template>
   <div id="wrapper">
-    <template  v-if="getToken()">
-      <el-menu class="el-menu-demo" mode="horizontal" >
-        <el-menu-item index="1" @click="loginout()">登出</el-menu-item>
-      </el-menu>
+    <template v-if="getToken()">
+      <div id="hi">
+        <el-button type="text" icon="date">886</el-button>
+      </div>
     </template>
     <template v-else>
-      <el-menu  class="el-menu-demo" mode="horizontal">
-        <el-menu-item index="1"><el-button type="text" @click="open1">登录</el-button></el-menu-item>
-      </el-menu>
+      <div id="hi">
+        <form>
+          <input type="password" name="code" value="" placeholder="你好啊">
+          <div class="line"></div>
+        </form>
+      </div>
     </template>
-    <div id="hi">
-      <input type="password" name="code" value="" placeholder="你好啊">
-      <div class="line"></div>
-    </div>
   </div>
 
 </template>
 
 <script>
+
   export default {
     methods: {
-      loginout(){
+      logout(){
+        alert(1)
         sessionStorage.clear();
       },
       getToken() {
@@ -55,10 +56,10 @@
     border:none;
     opacity:.6;
     outline-color: rgba(0,0,0,0);
-    text-align: center;
+    text-align: left;
     position:absolute;
     z-index:99;
-    top:10em;
+    top:8em;
     right: 0em;
     line-height: 2em;
     color: #1eb8d9;
@@ -71,4 +72,15 @@
     border-bottom: 1px solid #1eb8d9;
   }
 
+  .el-button {
+    color: #444444;
+    font-size: 16px;
+    position:absolute;
+    z-index:98;
+    top:10em;
+    right: 0em;
+  }
+  .el-button:hover {
+    color: #666666;
+  }
 </style>
