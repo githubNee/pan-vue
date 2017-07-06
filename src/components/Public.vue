@@ -52,7 +52,6 @@
 
 <script>
   import axios from 'axios';
-  import server from '../../config/index';
   import router from '../router/index.js';
   import myTitle from './common/Title.vue';
   import myLogin from './common/Login.vue';
@@ -60,7 +59,7 @@
   export default {
     data() {
       return {
-        url: server.url + '/pan/public',
+        url: '/api/pan/public',
         tableData: []
       }
     },
