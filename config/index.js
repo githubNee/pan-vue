@@ -29,11 +29,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
         '/api' :{
-            target: 'http://localhost:3000',
-            changeOrigin:true,
-            pathRewrite:{
-                '^/api': ':3000/api'
-            }
+            target: 'http://115.159.126.61:3000/'
         }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
