@@ -7,11 +7,9 @@
     </template>
     <template v-else>
       <div id="hi">
-        <form>
-          <input type="password" name="code" value="" placeholder="你好啊"
-            @keyup.enter.prevent="login()" v-model="info.password">
-          <div class="line"></div>
-        </form>
+        <input type="password" name="code" value="" placeholder="你好啊"
+          v-on:keyup.enter.prevent="login()" v-model="info.password">
+        <div class="line"></div>
       </div>
     </template>
   </div>
@@ -40,7 +38,7 @@
         .then(function(response) {
           sessionStorage.setItem('token', response.data)
           Message.success('登录成功');
-          router.push('/');
+          router.go(0);
         })
         .catch(function (response) {
           Message.error('登录失败');
@@ -48,7 +46,7 @@
       },
       logout(){
         sessionStorage.clear();
-        router.push('/');
+        router.go(0);
       },
       getToken() {
         sessionStorage.getItem('token');
