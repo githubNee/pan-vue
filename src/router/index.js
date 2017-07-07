@@ -24,6 +24,10 @@ export default new Router({
                     resolve(require('../components/Private.vue'));
                 })
             }
+        },
+        {
+            path: '*',
+            redirect: '/public'
         }
     ]
 })

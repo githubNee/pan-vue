@@ -1,17 +1,13 @@
 <template>
   <div id="wrapper">
-    <template v-if="getToken()">
-      <div id="hi">
-        <el-button type="text" icon="date" @click="logout()">886</el-button>
-      </div>
-    </template>
-    <template v-else>
-      <div id="hi">
-        <input type="password" name="code" value="" placeholder="你好啊"
-          v-on:keyup.enter.prevent="login()" v-model="info.password">
-        <div class="line"></div>
-      </div>
-    </template>
+    <div id="hi" v-if="isLogged">
+      <el-button type="text" icon="date" @click="logout()">886</el-button>
+    </div>
+    <div id="hi" v-else>
+      <input type="password" name="code" value="" placeholder="你好啊"
+        v-on:keyup.enter.prevent="login()" v-model="info.password">
+      <div class="line"></div>
+    </div>
   </div>
 
 </template>
@@ -20,6 +16,7 @@
   import axios from 'axios';
   import { Message } from 'element-ui';
   import router from '../../router/index.js';
+  import bus from './bus.js';
 
   var root = process.env.API_ROOT;
 
@@ -27,6 +24,7 @@
     data() {
       return {
         url: root + '/account/login',
+        isLogged: false,
         info: {
           password: ''
         }
@@ -34,19 +32,25 @@
     },
     methods: {
       login() {
+        var that = this;
+
         axios.post(this.url, this.info)
         .then(function(response) {
-          sessionStorage.setItem('token', response.data)
+          sessionStorage.setItem('token', response.data);
+          
+          that.isLogged = true;
           Message.success('登录成功');
-          router.go(0);
         })
         .catch(function (response) {
           Message.error('登录失败');
         })
       },
       logout(){
+        var that = this;
         sessionStorage.clear();
-        router.go(0);
+        that.isLogged = false;
+        that.info.password = '';
+        Message.success('886');
       },
       getToken() {
         sessionStorage.getItem('token');
