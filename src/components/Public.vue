@@ -56,10 +56,12 @@
   import myTitle from './common/Title.vue';
   import myLogin from './common/Login.vue';
 
+  var root = process.env.API_ROOT;
+
   export default {
     data() {
       return {
-        url: '/api/pan/public',
+        url: root + '/pan/public',
         tableData: []
       }
     },
