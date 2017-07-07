@@ -1,17 +1,33 @@
 <template>
 	<div id="heading">
     <div id="title" style="">{{title}}</div>
-    <div id="sub-title">{{sub_title}}</div>
+    <div id="sub-title" @click="goTarget">{{sub_title}}</div>
   </div>
 </template>
 
 <script>
+	import router from '../../router/index.js';
+
 	export default {
 		data() {
 			return {
 				"title": "老司机 带带我",
-				"sub_title": "啊嘞啊嘞嘞"
+				"sub_title": "啊嘞啊嘞嘞",
+				"target": "/private"
 			}
+		},
+		methods: {
+			goTarget() {
+				router.push(this.target);
+			}
+		},
+		created() {
+			if (router.currentRoute.name === 'public') {
+				this.title = '没时间 上车了'
+				this.target = '/private';
+			}
+			else
+				this.target = '/public';
 		}
 	}
 </script>

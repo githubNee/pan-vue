@@ -51,6 +51,7 @@
         that.isLogged = false;
         that.info.password = '';
         Message.success('886');
+        router.push('/public');
       },
       getToken() {
         sessionStorage.getItem('token');
@@ -59,6 +60,12 @@
         else
           return false;
       }
+    },
+    created() {
+      if (sessionStorage.getItem('token'))
+        this.isLogged = true;
+      else
+        this.isLogged = false
     }
   }
 </script>
