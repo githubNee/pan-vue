@@ -2,13 +2,14 @@
   <div id="wrapper">
     <template v-if="getToken()">
       <div id="hi">
-        <el-button type="text" icon="date">886</el-button>
+        <el-button type="text" icon="date" @click="logout()">886</el-button>
       </div>
     </template>
     <template v-else>
       <div id="hi">
         <form>
-          <input type="password" name="code" value="" placeholder="你好啊">
+          <input type="password" name="code" value="" placeholder="你好啊"
+            @keyup.enter.prevent="login()" v-model="info.password">
           <div class="line"></div>
         </form>
       </div>
@@ -18,34 +19,43 @@
 </template>
 
 <script>
+  import axios from 'axios';
+  import { Message } from 'element-ui';
+  import router from '../../router/index.js';
+
+  var root = process.env.API_ROOT;
 
   export default {
+    data() {
+      return {
+        url: root + '/account/login',
+        info: {
+          password: ''
+        }
+      }
+    },
     methods: {
+      login() {
+        axios.post(this.url, this.info)
+        .then(function(response) {
+          sessionStorage.setItem('token', response.data)
+          Message.success('登录成功');
+          router.push('/');
+        })
+        .catch(function (response) {
+          Message.error('登录失败');
+        })
+      },
       logout(){
-        alert(1)
         sessionStorage.clear();
+        router.push('/');
       },
       getToken() {
+        sessionStorage.getItem('token');
         if (sessionStorage.getItem('token') != null)
           return true;
         else
           return false;
-      },
-      open1() {
-        this.$prompt('请输入密钥', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-        }).then(({ value }) => {
-          this.$message({
-            type: 'success',
-            message: '登录成功'
-          });
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '取消输入'
-          });
-        });
       }
     }
   }

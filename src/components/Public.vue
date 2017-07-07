@@ -1,16 +1,14 @@
 <template>
   <div class="">
-
     <my-title></my-title>
 
-    <div id="container" style="margin:0 0">
+    <div id="container">
       <el-table
         :data="tableData"
         :row-style="{
           'background':'rgba(0,0,0,0)',
           'height':'45px',
         }"
-        style="background:rgba(240,240,240,0.5);border-style: hidden hidden;width: 70%;text-align:left;margin:0 auto;"
         >
         <el-table-column
           label="文件名"
@@ -108,7 +106,16 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  
+  #container {
+    margin:0 0;
+  }
+  #container .el-table {
+    background:rgba(240,240,240,0.5);
+    border-style: hidden hidden;
+    width: 70%;
+    text-align:left;
+    margin:0 auto;
+  }
   .el-dropdown-menu__item{
       text-align: center;
   }
