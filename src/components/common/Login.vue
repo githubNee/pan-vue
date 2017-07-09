@@ -64,7 +64,7 @@
 		bottom: 4em;
   }
   #hi input{
-    font-size: 1.5rem;
+    font-size: 1rem;
     background: transparent;
     border:none;
     opacity:.6;
@@ -76,7 +76,6 @@
     right: 0em;
     line-height: 2em;
     color: #1eb8d9;
-    font-size: 1.5rem;
   }
   #hi input:hover{
     opacity: .9;
@@ -88,7 +87,7 @@
 
   #hi .el-button {
     color: #444444;
-    font-size: 1.5rem;
+    font-size: 1rem;
     position:absolute;
     z-index:98;
     bottom:2em;
