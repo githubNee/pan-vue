@@ -57,7 +57,7 @@
 		    tableData: [],
 		    update: function (url) {
 		    	var that = this;
-		    	axios.get (url)
+		    	axios.get (url, {headers: {'authorization': sessionStorage.getItem('token')}})
 		    	.then(function(response) {
 		    	  if(response.status == 200){
 		    	    var temp = response.data.items;
@@ -72,6 +72,7 @@
 		    	  }
 
 		    	}).catch(function (error) {
+		    		Message.error('未登录');
 		    	  console.log(error);
 		    	});
 		    }
@@ -99,7 +100,6 @@
 		  bus.$on('status', status => {
 				this.status = status;
 				url = this.url + this.status;
-				alert(url);
 				this.update(url);
 			});
 		}

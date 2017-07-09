@@ -1,19 +1,13 @@
 <template>
   <div id="wrapper">
-    <template v-if="getToken()">
-      <div id="hi">
-        <el-button type="text" icon="date" @click="logout()">886</el-button>
-      </div>
-    </template>
-    <template v-else>
-      <div id="hi">
-        <form>
-          <input type="password" name="code" value="" placeholder="你好啊"
-            @keyup.enter.prevent="login()" v-model="info.password" >
-          <div class="line"></div>
-        </form>
-      </div>
-    </template>
+    <div id="hi" v-if="isLogged">
+      <el-button type="text" icon="date" @click="logout()">886</el-button>
+    </div>
+    <div id="hi" v-else>
+      <input type="password" name="code" value="" placeholder="你好啊"
+        @keyup.enter.prevent="login()" v-model="info.password" >
+      <div class="line"></div>
+    </div>
   </div>
 
 </template>
@@ -22,6 +16,7 @@
   import axios from 'axios';
   import { Message } from 'element-ui';
   import router from '../../router/index.js';
+  import bus from './bus.js';
 
   var root = process.env.API_ROOT;
 
@@ -31,7 +26,8 @@
         url: root + '/account/login',
         info: {
           password: ''
-        }
+        },
+        isLogged: false
       }
     },
     methods: {
@@ -42,24 +38,23 @@
         .then(function(response) {
           sessionStorage.setItem('token', response.data);
           that.isLogged = true;
+          Message.success('登录成功');
+
+          bus.$emit('login', that.isLogged);
         })
         .catch(function (response) {
-          this.info.password = '';
+          console.log(response);
           Message.error('登录失败');
-        })
+          this.info.password = '';
+        });
       },
       logout(){
         sessionStorage.clear();
         this.isLogged = false;
         this.info.password = '';
         Message.success('886');
-      },
-      getToken() {
-        sessionStorage.getItem('token');
-        if (sessionStorage.getItem('token') != null)
-          return true;
-        else
-          return false;
+
+        bus.$emit('login', that.isLogged);
       }
     }
   }
