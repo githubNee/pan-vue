@@ -21,7 +21,7 @@
   var root = process.env.API_ROOT;
 
   export default {
-    data() {
+    data () {
       return {
         url: root + '/account/login',
         isLogged: false,
@@ -31,34 +31,25 @@
       }
     },
     methods: {
-      login() {
+      login: function () {
         var that = this;
 
         axios.post(this.url, this.info)
         .then(function(response) {
           sessionStorage.setItem('token', response.data);
-          
           that.isLogged = true;
           Message.success('登录成功');
         })
         .catch(function (response) {
+          this.info.password = '';
           Message.error('登录失败');
         })
       },
       logout(){
-        var that = this;
         sessionStorage.clear();
-        that.isLogged = false;
-        that.info.password = '';
+        this.isLogged = false;
+        this.info.password = '';
         Message.success('886');
-        router.push('/public');
-      },
-      getToken() {
-        sessionStorage.getItem('token');
-        if (sessionStorage.getItem('token') != null)
-          return true;
-        else
-          return false;
       }
     },
     created() {
@@ -75,13 +66,14 @@
     border:none;
     opacity:.6;
     outline-color: rgba(0,0,0,0);
-    text-align: left;
+    text-align: right;
     position:absolute;
     z-index:99;
     top:8em;
     right: 0em;
     line-height: 2em;
     color: #1eb8d9;
+    font-size: 1.5rem;
   }
   #hi input:hover{
     opacity: .9;
@@ -93,7 +85,7 @@
 
   .el-button {
     color: #444444;
-    font-size: 16px;
+    font-size: 1.5rem;
     position:absolute;
     z-index:98;
     top:10em;

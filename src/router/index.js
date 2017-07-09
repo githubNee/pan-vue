@@ -6,30 +6,17 @@ Vue.use(Router);
 export default new Router({
     routes: [
         {
+            name: 'main',
             path: '/',
-            redirect: '/public'
-        },
-        {
-            name: 'public',
-            path: '/public',
             component: resolve => {
-                require.ensure(['../components/Public.vue'], () => {
-                    resolve(require('../components/Public.vue'));
-                })
-            }
-        },
-        {
-            name: 'private',
-            path: '/private',
-            component: resolve => {
-                require.ensure(['../components/Private.vue'], () => {
-                    resolve(require('../components/Private.vue'));
+                require.ensure(['../components/Main.vue'], () => {
+                    resolve(require('../components/Main.vue'));
                 })
             }
         },
         {
             path: '*',
-            redirect: '/public'
+            redirect: '/'
         }
     ]
 })

@@ -1,33 +1,40 @@
 <template>
 	<div id="heading">
     <div id="title" style="">{{title}}</div>
-    <div id="sub-title" @click="goTarget">{{sub_title}}</div>
+    <div id="sub-title" @click="change()">啊嘞啊嘞嘞</div>
   </div>
 </template>
 
 <script>
 	import router from '../../router/index.js';
+	import bus from './bus.js';
+	import { Message } from 'element-ui';
 
 	export default {
 		data() {
 			return {
-				"title": "老司机 带带我",
-				"sub_title": "啊嘞啊嘞嘞",
-				"target": "/private"
+				title: "没时间 上车了",
+				status: "public",
+				update: function() {
+					bus.$emit('status', this.status);
+				}
 			}
 		},
 		methods: {
-			goTarget() {
-				router.push(this.target);
+			change() {
+				if (this.status === 'public') {
+					if (!sessionStorage.getItem('token')) {
+						Message.error('未登录');
+						return ;
+					}
+					this.title = '老司机 带带我';
+					this.status = 'private';
+				} else {
+					this.title = '没时间 上车了';
+					this.status = 'public';
+				}
+				this.update();
 			}
-		},
-		created() {
-			if (router.currentRoute.name === 'public') {
-				this.title = '没时间 上车了'
-				this.target = '/private';
-			}
-			else
-				this.target = '/public';
 		}
 	}
 </script>
@@ -35,7 +42,7 @@
 <style>
 	#heading {
 		margin:10% 0 7% 0;
-		text-align:center
+		text-align:center;
 	}
 	#title {
 		font-size:45px;
