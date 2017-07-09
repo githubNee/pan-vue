@@ -1,13 +1,19 @@
 <template>
   <div id="wrapper">
-    <div id="hi" v-if="isLogged">
-      <el-button type="text" icon="date" @click="logout()">886</el-button>
-    </div>
-    <div id="hi" v-else>
-      <input type="password" name="code" value="" placeholder="你好啊"
-        v-on:keyup.enter.prevent="login()" v-model="info.password">
-      <div class="line"></div>
-    </div>
+    <template v-if="getToken()">
+      <div id="hi">
+        <el-button type="text" icon="date" @click="logout()">886</el-button>
+      </div>
+    </template>
+    <template v-else>
+      <div id="hi">
+        <form>
+          <input type="password" name="code" value="" placeholder="你好啊"
+            @keyup.enter.prevent="login()" v-model="info.password" >
+          <div class="line"></div>
+        </form>
+      </div>
+    </template>
   </div>
 
 </template>
@@ -16,7 +22,6 @@
   import axios from 'axios';
   import { Message } from 'element-ui';
   import router from '../../router/index.js';
-  import bus from './bus.js';
 
   var root = process.env.API_ROOT;
 
@@ -24,7 +29,6 @@
     data () {
       return {
         url: root + '/account/login',
-        isLogged: false,
         info: {
           password: ''
         }
@@ -38,7 +42,6 @@
         .then(function(response) {
           sessionStorage.setItem('token', response.data);
           that.isLogged = true;
-          Message.success('登录成功');
         })
         .catch(function (response) {
           this.info.password = '';
@@ -50,18 +53,20 @@
         this.isLogged = false;
         this.info.password = '';
         Message.success('886');
+      },
+      getToken() {
+        sessionStorage.getItem('token');
+        if (sessionStorage.getItem('token') != null)
+          return true;
+        else
+          return false;
       }
-    },
-    created() {
-      if (sessionStorage.getItem('token'))
-        this.isLogged = true;
-      else
-        this.isLogged = false
     }
   }
 </script>
 <style media="screen">
   #hi input{
+    font-size: 1.5rem;
     background: transparent;
     border:none;
     opacity:.6;
@@ -88,7 +93,7 @@
     font-size: 1.5rem;
     position:absolute;
     z-index:98;
-    top:10em;
+    top:8em;
     right: 0em;
   }
   .el-button:hover {
