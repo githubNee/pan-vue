@@ -11,24 +11,16 @@
 	export default {
 		data() {
 			return {
-				"status": false,
-				"base_url": "/api",
-				"target": "/public",
-				"url": ""
+				status: false,
+				base_url: "/api",
+				target: "/public",
+				url: ""
 			}
 		},
 		created() {
 			bus.$on('login', status => {
 				this.status = status;
 			});
-			if (router.currentRoute.name == 'private') {
-				this.target = '/private';
-				this.url = this.base_url + this.target;
-			}
-			else {
-				this.target = '/public';
-				this.url = this.base_url + this.target;
-			}
 		}
 	}
 </script>

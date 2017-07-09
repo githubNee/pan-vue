@@ -43,7 +43,6 @@
           bus.$emit('login', that.isLogged);
         })
         .catch(function (response) {
-          console.log(response);
           Message.error('登录失败');
           this.info.password = '';
         });
@@ -54,7 +53,7 @@
         this.info.password = '';
         Message.success('886');
 
-        bus.$emit('login', that.isLogged);
+        bus.$emit('login', this.isLogged);
       }
     }
   }
