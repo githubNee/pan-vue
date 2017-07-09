@@ -9,7 +9,7 @@
       <div id="hi">
         <form>
           <input type="password" name="code" value="" placeholder="你好啊"
-            @keyup.enter.prevent="login()" v-model="info.password">
+            @keyup.enter.prevent="login()" v-model="info.password" >
           <div class="line"></div>
         </form>
       </div>
@@ -40,7 +40,7 @@
         .then(function(response) {
           sessionStorage.setItem('token', response.data)
           Message.success('登录成功');
-          router.push('/');
+          router.push(0);
         })
         .catch(function (response) {
           Message.error('登录失败');
@@ -48,7 +48,7 @@
       },
       logout(){
         sessionStorage.clear();
-        router.push('/');
+        router.go(0);
       },
       getToken() {
         sessionStorage.getItem('token');
@@ -62,11 +62,12 @@
 </script>
 <style media="screen">
   #hi input{
+    font-size: 1.5rem;
     background: transparent;
     border:none;
     opacity:.6;
     outline-color: rgba(0,0,0,0);
-    text-align: left;
+    text-align: right;
     position:absolute;
     z-index:99;
     top:8em;
@@ -84,10 +85,10 @@
 
   .el-button {
     color: #444444;
-    font-size: 16px;
+    font-size: 1.5rem;
     position:absolute;
     z-index:98;
-    top:10em;
+    top:8em;
     right: 0em;
   }
   .el-button:hover {
