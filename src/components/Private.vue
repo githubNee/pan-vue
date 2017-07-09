@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="">
     <my-title></my-title>
 
     <div id="container">
@@ -9,7 +9,6 @@
           'background':'rgba(0,0,0,0)',
           'height':'45px',
         }"
-        style="background:rgba(240,240,240,0.5);border-style: hidden hidden;width: 70%;text-align:left;margin:0 auto;"
         >
         <el-table-column
           label="文件名"
@@ -44,6 +43,8 @@
         </el-table-column>
       </el-table>
     </div>
+
+    <my-login></my-login>
   </div>
 </template>
 
@@ -51,35 +52,36 @@
   import axios from 'axios';
   import router from '../router/index.js';
   import myTitle from './common/Title.vue';
+  import myLogin from './common/Login.vue';
+  import { Message } from 'element-ui';
+
+  var root = process.env.API_ROOT;
 
   export default {
     data() {
       return {
-        url: '/api/pan/public',
+        url: root + '/pan/private',
         tableData: []
       }
     },
     components: {
-      myTitle
+      myTitle, myLogin
     },
     created () {
       var that = this;
-      axios.get (this.url)
+      var header = {'headers': {'authorization': sessionStorage.getItem('token')}}
+      axios.get (this.url, header)
       .then(function(response) {
-        if(response.status == 200){
-          var temp = response.data.items;
-          for (var index = 0;index<temp.length;index ++){
-            var newDate = new Date();
-            newDate.setTime(temp[index].putTime / 10000);
-            temp[index].putTime = newDate.toLocaleDateString().split('T')[0];
-          }
-          that.tableData = temp;
-        } else {
-          console.log(response.status);
+        var temp = response.data.items;
+        for (var index = 0;index<temp.length;index ++){
+          var newDate = new Date();
+          newDate.setTime(temp[index].putTime / 10000);
+          temp[index].putTime = newDate.toLocaleDateString().split('T')[0];
         }
-
+        that.tableData = temp;
       }).catch(function (error) {
-        console.log(error);
+        Message.error('未登陆');
+        router.push('/public');
       });
     },
     methods: {
@@ -104,6 +106,13 @@
 <style scoped>
   #container {
     margin:0 0;
+  }
+  #container .el-table {
+    background:rgba(240,240,240,0.5);
+    border-style: hidden hidden;
+    width: 70%;
+    text-align:left;
+    margin:0 auto;
   }
   .el-dropdown-menu__item{
       text-align: center;

@@ -10,6 +10,7 @@ export default new Router({
             redirect: '/public'
         },
         {
+            name: 'public',
             path: '/public',
             component: resolve => {
                 require.ensure(['../components/Public.vue'], () => {
@@ -18,12 +19,17 @@ export default new Router({
             }
         },
         {
+            name: 'private',
             path: '/private',
             component: resolve => {
                 require.ensure(['../components/Private.vue'], () => {
                     resolve(require('../components/Private.vue'));
                 })
             }
+        },
+        {
+            path: '*',
+            redirect: '/public'
         }
     ]
 })
