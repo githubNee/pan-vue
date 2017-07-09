@@ -30,7 +30,7 @@
 		z-index: 96;
 		top: 3em;
 	}
-	.el-button {
+	#wrapper .el-button {
 	  color: #444444;
 	  font-size: 16px;
 	  position:absolute;

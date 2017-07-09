@@ -1,5 +1,5 @@
 <template>
-  <div id="wrapper">
+  <div id="wrapper2">
     <div id="hi" v-if="isLogged">
       <el-button type="text" icon="date" @click="logout()">886</el-button>
     </div>
@@ -59,6 +59,10 @@
   }
 </script>
 <style media="screen">
+  #wrapper2{
+    z-index: 97;
+		bottom: 4em;
+  }
   #hi input{
     font-size: 1.5rem;
     background: transparent;
@@ -68,7 +72,7 @@
     text-align: right;
     position:absolute;
     z-index:99;
-    top:8em;
+    bottom:2em;
     right: 0em;
     line-height: 2em;
     color: #1eb8d9;
@@ -82,15 +86,15 @@
     border-bottom: 1px solid #1eb8d9;
   }
 
-  .el-button {
+  #hi .el-button {
     color: #444444;
     font-size: 1.5rem;
     position:absolute;
     z-index:98;
-    top:8em;
+    bottom:2em;
     right: 0em;
   }
-  .el-button:hover {
+  #hi .el-button:hover {
     color: #666666;
   }
 </style>
